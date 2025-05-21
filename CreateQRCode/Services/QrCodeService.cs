@@ -14,10 +14,7 @@ namespace CreateQRCode.Services
         {
             using (var qrGenerator = new QRCodeGenerator())
             {
-                // var url = $"{requestURL.TrimEnd('/')}/Home/{liceNumber}/TourGuideProfile?id={Guid.NewGuid()}";
-
-                string filePathPhysical = $"/Content/Files/{fileName}-QR.png";
-
+              
                 // Create wwwroot/qrcodes if it doesn't exist
                 string folderPath = Path.Combine(_env.WebRootPath, "qrcodes");
                 if (!Directory.Exists(folderPath))
