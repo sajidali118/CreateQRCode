@@ -1,0 +1,39 @@
+﻿@model CreateQRCodelVM
+@{
+    ViewData["Title"] = "Generate QR Code";
+}
+
+<h2>Generate QR Code for a URL</h2>
+
+<form method="post" id="taskForm" name="taskForm">
+    <label for="InputUrl">Enter File Name:</label>
+    <input type="text" asp-for="FileName" class="form-control" placeholder="file name" />
+    <br />
+    <label for="InputUrl">Enter URL:</label>
+    <input type="text" asp-for="URL" class="form-control" placeholder="https://example.com" />
+    <br />
+    <button type="submit" class="btn btn-primary">Generate QR Code</button>
+    <button type="reset" id="btnReset" onclick="resetForm();" class="btn btn-danger">Reset</button>
+</form>
+
+@if (Model.QrCodeImage != null)
+{
+    <hr />
+    <h4>QR Code:</h4>
+    <a download="@Model.QrCodeImage" href="@Model.QrCodeImage">
+    <img src="@Model.QrCodeImage" alt="QR Code"  />
+    </a>
+}
+
+<script>
+
+     function resetForm() {
+        document.getElementById("qrForm").reset();
+    }
+     function resetFormAndValidation() {
+        $("#taskForm").trigger("reset");
+        $("#FileName").val("");
+        $("#URL").val("");
+    }
+
+</script>
