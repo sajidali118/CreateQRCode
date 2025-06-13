@@ -1,0 +1,55 @@
+﻿@model WifiQrModel
+@{
+    ViewData["Title"] = "Wi-Fi QR Code";
+}
+
+<h2>Generate Wi-Fi QR Code</h2>
+
+<form id="wifiForm" method="post">
+    <div>
+        <label>SSID (Wi-Fi Name):</label>
+        <input asp-for="SSID" class="form-control" />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input asp-for="Password" type="password" class="form-control" />
+    </div>
+    <div>
+        <label>Authentication Type:</label>
+        <select asp-for="AuthType" class="form-control">
+            <option>WPA</option>
+            <option>WPA2</option>
+            <option>WPA2-Personal</option>
+            <option>WEP</option>
+            <option>nopass</option>
+        </select>
+    </div>
+    <div>
+        <label><input asp-for="Hidden" type="checkbox" /> Hidden Network</label>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Generate QR Code</button>
+    <button type="button" onclick="document.getElementById('wifiForm').reset()" class="btn btn-secondary">Reset</button>
+</form>
+
+@if (Model.QrCodePath != null)
+{
+    <hr />
+    <h4>Scan to Connect:</h4>
+    <img src="@Model.QrCodePath" alt="Wi-Fi QR Code" />
+    <p><a href="@Model.QrCodePath" download>Download QR Code</a></p>
+}
+
+
+<script>
+
+     function resetForm() {
+        document.getElementById("qrForm").reset();
+    }
+     function resetFormAndValidation() {
+        $("#taskForm").trigger("reset");
+        $("#FileName").val("");
+        $("#URL").val("");
+    }
+
+</script>

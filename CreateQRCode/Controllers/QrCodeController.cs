@@ -41,6 +41,33 @@ namespace CreateQRCode.Controllers
             return View(create);
         }
 
+        public IActionResult GenerateWiFi()
+        {
+            WifiQrModel create = new WifiQrModel();
+            return View(create);
+        }
+
+        [HttpPost]
+        public IActionResult GenerateWiFi(WifiQrModel create)
+        {
+            if (string.IsNullOrWhiteSpace(create.SSID))
+                return BadRequest("SSID is required.");
+
+            if (string.IsNullOrWhiteSpace(create.Password))
+                return BadRequest("Password is required.");
+
+            var qrCodeImage = _qrCodeService.GenerateWifiQrCodeAndSave(create);
+            if (qrCodeImage != null)
+            {
+                var filePathPhysical = $"{qrCodeImage}";
+
+                create.QrCodePath = filePathPhysical;
+            }
+            return View(create);
+        }
+
+
+
         public IActionResult Privacy()
         {
             return View();
