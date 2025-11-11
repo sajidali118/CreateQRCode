@@ -31,7 +31,9 @@ namespace CreateQRCode.Controllers
             if (string.IsNullOrWhiteSpace(create.FileName))
                 return BadRequest("File Name is required.");
 
-            var qrCodeImage = _qrCodeService.GenerateQrCode(create.URL, create.FileName);
+            //var qrCodeImage = _qrCodeService.GenerateQrCode(create.URL, create.FileName);
+            var qrCodeImage = _qrCodeService.GenerateQrCodeWithLogo(create.URL, create.FileName);
+            
             if (qrCodeImage != null)
             {
                 var filePathPhysical = $"{qrCodeImage}";
