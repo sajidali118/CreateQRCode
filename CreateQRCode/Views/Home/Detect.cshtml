@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Detect Emirates ID Front & Back";
+}
+
+<h2>Upload Both Sides of Emirates ID</h2>
+
+<form asp-controller="Home" asp-action="Detect" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Front Side Image:</label>
+        <input type="file" name="FrontFile" accept="image/jpg,image/jpeg,image/png" required />
+    </div>
+    <div style="margin-top:10px;">
+        <label>Back Side Image:</label>
+        <input type="file" name="BackFile" accept="image/jpg,image/jpeg,image/png" required />
+    </div>
+    <br />
+    <button type="submit">Upload & Detect</button>
+</form>
+
+@if (ViewBag.FrontResult != null)
+{
+    <hr />
+    <h4>Front Image Detected as: <span style="color:blue">@ViewBag.FrontResult</span></h4>
+    <pre>@ViewBag.FrontText</pre>
+    <pre>@ViewBag.FrontTextResult</pre>
+}
+
+@if (ViewBag.BackResult != null)
+{
+    <hr />
+    <h4>Back Image Detected as: <span style="color:blue">@ViewBag.BackResult</span></h4>
+    <pre>@ViewBag.BackText</pre>
+}
